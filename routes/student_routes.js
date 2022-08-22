@@ -12,7 +12,7 @@ const upload = require('../multer/multer');
 })();
 
 function post_requests() {
-    Router.post('/add_student_detail',add_student_validation(),upload.single('profile'),result_validator, student_add_controller);
+    Router.post('/add_student_detail',upload.single("profile"),add_student_validation(),result_validator, student_add_controller);
 }
 
 function patch_request() {

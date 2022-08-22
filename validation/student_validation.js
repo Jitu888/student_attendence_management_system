@@ -18,7 +18,7 @@ exports.add_student_validation = () => {
       // console.log(req.body);
       const Class = req.body.class
       const section = req.body.section
-      // console.log(Class)
+      //  console.log(req)
       const result = await StudentModel.findOne({ class: Class, rollNo, section })
       //console.log(result)
 
@@ -49,11 +49,11 @@ exports.add_student_validation = () => {
 
 
 exports.student_attendence_validation = () => {
-
+   
   return [
-
     check('Attendence')
       .isAlpha()
-      .withMessage('must be alphabet either P or A')
+      .withMessage('must be alphabet either P or A'),
+      check('month').isLength({max:31}).withMessage('month complete')
   ]
 }

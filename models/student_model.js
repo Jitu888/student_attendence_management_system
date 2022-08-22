@@ -23,15 +23,15 @@ const model = mongoose.Schema({
       profile: {
             type: String
       },
-      year: {
-            type: Number,
-            required: true
+      year:{
+            type:Number
       },
       jan: {
-            type: Array
+            type:Array
+            
       },
       feb: {
-            type: Array
+            type:Array
       },
       march: { type: Array },
       april: { type: Array },

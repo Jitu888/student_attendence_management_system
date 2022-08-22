@@ -7,3 +7,11 @@ server.listen(PORT, () => {
   console.log(`server is running on:${PORT}`);
 
 })
+
+
+
+
+
+
+
+// https://student-attendence-management.herokuapp.com/add_student_detail

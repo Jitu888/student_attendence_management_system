@@ -1,5 +1,6 @@
 //const {signupModel} = require('signupModel');
 const { validationResult } = require('express-validator');
+const fs = require('fs')
 
 exports.result_validator = (req, res, next) => {
    // console.log(req)
@@ -13,7 +14,12 @@ exports.result_validator = (req, res, next) => {
 
    // hasErrors ? next((JSON.stringify(result.array()))): next();
      if(hasErrors){
-        const errorList =result.array()?.map((obj)=>{
+        fs.unlink(req.file.path, (err) => {
+            if (err) {multipart/form-data
+              /* HANLDE ERROR */
+            }
+          });
+          const errorList =result.array()?.map((obj)=>{
     
             return obj.msg;
         })
@@ -27,4 +33,13 @@ exports.result_validator = (req, res, next) => {
      
     }
     
-      
+    // fs.unlink(req.file.path, (err) => {
+    //     if (err) {multipart/form-data
+    //       /* HANLDE ERROR */
+    //     }
+    //     console.log(`successfully deleted ${req.file.path}`);
+    //   });
+  
+    //   // return bad request
+    //   res.status(400).send(errors);
+    
