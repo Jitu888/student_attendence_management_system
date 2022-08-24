@@ -14,24 +14,14 @@ exports.add_student_validation = () => {
       .withMessage("Not a valid class"),
     check('rollNo').isNumeric().withMessage("rollNo must be a number").isLength({ max: 2 })
     .custom(async (rollNo, { req, res }) => {
-      //  console.log(section);
-      // console.log(req.body);
       const Class = req.body.class
       const section = req.body.section
-      //  console.log(req)
       const result = await StudentModel.findOne({ class: Class, rollNo, section })
-      //console.log(result)
 
       if (!result) {
-        //throw new Error("Roll")
-       // console.log(req.body)
-       // console.log(result)
         req.body.userInfo = result;
-        //req.body.userInfo = result;
       }
       else {
-       // console.log(result)
-        // req.body.userInfo = result;
         throw new Error("Rollno is already occupied")
       }
       return true

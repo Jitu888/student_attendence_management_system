@@ -1,19 +1,20 @@
 const StudentModel = require("../models/student_model");
 
 exports.student_add_controller = (req, res) => {
-  console.log(req.file.filename)
-  const profile = `http://localhost:5000/uploads/${req.file.filename}`
+  const profile = req.file.path
+  console.log(profile)
   req.body.profile = profile
   const data = req.body
+  console.log(data)
   StudentModel(data).save((err, result) => {
     if (err) {
       res.status(400).send(err)
     }
-    //console.log(result)
     else {
       res.status(200).send(result)
     }
   })
+
 };
 
 
@@ -30,7 +31,6 @@ exports.student_get_controller = async (req, res) => {
 
   let startIndex = (page - 1) * limit
   let endIndex = limit
-  //console.log(!Class)
   if (!Class || !rollNo || !section) {
     let result = await StudentModel.find({}).skip(startIndex).limit(endIndex)
     res.status(200).send({ result })
@@ -64,13 +64,13 @@ exports.update_student_attendence = async (req, res) => {
   var Attendence = req.body.Attendence
 
   if (Attendence == "P" || Attendence == "A") {
+    const d = new Date();
+    const date = d.getDate()
     switch (req.body.month) {
       case "jan":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
         if (data.jan.length <= 31) {
-          const d = new Date();
-          const date = d.getDate()
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { jan:Attendence}  })
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { jan:date+":"+Attendence}  })
           res.send(result)
           break;
         }
@@ -88,7 +88,7 @@ exports.update_student_attendence = async (req, res) => {
 
         if ((0 == year % 4) && (0 != year % 100) || (0 == year % 400)) {
           if (data.feb.length <= 29) {
-            var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { feb: Attendence } })
+            var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { feb:date+":"+ Attendence } })
             res.send(result)
             break;
           }
@@ -99,7 +99,7 @@ exports.update_student_attendence = async (req, res) => {
         }
         else {
           if (data.feb.length <= 28) {
-            var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { feb:date && Attendence } })
+            var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { feb:date+":"+Attendence } })
             res.send(result)
             break;
           }
@@ -111,8 +111,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "march":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 31) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { march: Attendence } })
+        if (data.march.length <= 31) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { march:date+":"+ Attendence } })
           res.send(result)
           break;
         }
@@ -123,8 +123,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "april":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 30) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { april: Attendence } })
+        if (data.april.length <= 30) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { april:date+":"+ Attendence } })
           res.send(result)
           break;
         }
@@ -136,8 +136,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "may":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 31) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { may: Attendence } })
+        if (data.may.length <= 31) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { may:date+":"+ Attendence } })
           res.send(result)
           break;
         }
@@ -148,8 +148,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "june":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 30) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { june: Attendence } })
+        if (data.june.length <= 30) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { june:date+":"+ Attendence } })
           res.send(result)
           break;
         }
@@ -160,8 +160,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "july":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 31) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { july: Attendence } })
+        if (data.july.length <= 31) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { july:date+":"+ Attendence } })
           res.send(result)
           break;
         }
@@ -172,8 +172,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "august":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 31) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { aug: Attendence } })
+        if (data.aug.length <= 31) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { aug:date+":"+ Attendence } })
           res.send(result)
           break;
         }
@@ -184,8 +184,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "sept":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 30) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { sept: Attendence } })
+        if (data.sept.length <= 30) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { sept:date+":"+ Attendence } })
           res.send(result)
           break;
         }
@@ -196,8 +196,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "oct":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 31) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { oct: Attendence } })
+        if (data.oct.length <= 31) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { oct:date+":"+ Attendence } })
           res.send(result)
           break;
         }
@@ -208,8 +208,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "nov":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 30) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { nov: Attendence } })
+        if (data.nov.length <= 30) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { nov:date+":"+ Attendence } })
           res.send(result)
           break;
         }
@@ -220,8 +220,8 @@ exports.update_student_attendence = async (req, res) => {
 
       case "dec":
         var data = await StudentModel.findOne({ class: Class, section, rollNo })
-        if (data.jan.length <= 31) {
-          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { dec: Attendence } })
+        if (data.dec.length <= 31) {
+          var result = await StudentModel.updateOne({ class: Class, section, rollNo }, { $push: { dec:date+":"+ Attendence } })
           res.send(result)
           break;
         }

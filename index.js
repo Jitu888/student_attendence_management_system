@@ -14,4 +14,4 @@ server.listen(PORT, () => {
 
 
 
-// https://student-attendence-management.herokuapp.com/add_student_detail
+// https://student-attendence-management.herokuapp.com/get_student_deatils

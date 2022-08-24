@@ -7,13 +7,13 @@ const model = mongoose.Schema({
       },
       class: {
             type: Number,
-            //required: true
+            required: true
       },
       section: {
             type: String,
             max: 2,
             uppercase: true,
-            //required: true
+            required: true
       },
       rollNo: {
             type: Number,
@@ -33,16 +33,36 @@ const model = mongoose.Schema({
       feb: {
             type:Array
       },
-      march: { type: Array },
-      april: { type: Array },
-      may: { type: Array },
-      june: { type: Array },
-      july: { type: Array },
-      aug: { type: Array },
-      sept: { type: Array },
-      oct: { type: Array },
-      nov: { type: Array },
-      dec: { type: Array },
+      march: {
+             type: Array
+      },
+      april: { 
+            type: Array 
+      },
+      may: { 
+            type: Array
+      },
+      june: {
+             type: Array
+      },
+      july: {
+             type: Array
+      },
+      aug: { 
+            type: Array 
+      },
+      sept: {
+             type: Array
+      },
+      oct: {
+             type: Array
+      },
+      nov: {
+             type: Array 
+      },
+      dec: {
+             type: Array
+      },
 });
 
 
