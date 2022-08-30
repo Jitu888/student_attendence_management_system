@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const student_routes = require("./routes/student_routes")
 const api_version = "api/v1";
+const cors = require('cors');
 
 (() => {
     body_parser();
@@ -27,7 +28,7 @@ function db_config() {
 function body_parser() {
     app.use(express.urlencoded({ extended: true }))
     app.use(express.json());
-    
+    app.use(cors());
 }
 
 function routes_config() {

@@ -2,16 +2,18 @@ const StudentModel = require("../models/student_model");
 
 exports.student_add_controller = (req, res) => {
   const profile = req.file.path
-  console.log(profile)
+  console.log(".........................",profile)
+  console.log(">>>>>>>>>>>>>>>",req.file)
   req.body.profile = profile
+ // console.log(".....................",req.body.dateOfBirth)
   const data = req.body
-  console.log(data)
+ // console.log(data)
   StudentModel(data).save((err, result) => {
     if (err) {
       res.status(400).send(err)
     }
     else {
-      res.status(200).send(result)
+      res.status(200).send("student data saved successfully")
     }
   })
 
@@ -45,7 +47,7 @@ exports.student_get_controller = async (req, res) => {
           res.status(200).send({ msg: "Detail not found" });
         }
         else {
-          res.status(200).send({ result })
+          res.status(200).send(result)
         }
       }
     })

@@ -5,8 +5,16 @@ const model = mongoose.Schema({
             type: String,
             required: true
       },
+      gender:{
+            type:String,
+            required:true
+      },
+      dateOfBirth:{
+            type:String,
+            required:true
+      },
       class: {
-            type: Number,
+            type:String,
             required: true
       },
       section: {
